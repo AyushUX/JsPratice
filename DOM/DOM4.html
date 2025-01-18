@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul class="lang">
+        <li>Python</li>
+        <li>Javascript</li>
+        <li>Mulesoft</li>
+    </ul>
+</body>
+<script>
+    const newEle = document.createElement('li')
+    // newEle.innerHTML='Java'
+    const assign = document.createTextNode('Java')
+    newEle.appendChild(assign)
+    console.log(newEle);
+
+    const find1= document.querySelector('.lang')
+    find1.appendChild(newEle)
+    console.log(find1);
+
+    //Replace
+    const rep = document.querySelector('li:nth-child(1)')
+    const repl = document.createElement('li')
+    repl.innerHTML= 'Ayush'
+    console.log(repl);
+    rep.replaceWith(repl)
+
+    //Delete
+    const rep1 = document.querySelector('li:nth-child(1)')
+    rep1.remove()
+
+</script>
+</html>
