@@ -2,22 +2,46 @@
 
 // Passing a Function as an Argument: In JavaScript, functions are first-class citizens, which means they can be treated like any other data type, such as strings or numbers. Therefore, you can pass functions as arguments to other functions.
 
-//Callback function - Synchronous Javascript ko Asynchronous property provide krwata hai - They allow you to specify what should happen after an asynchronous task completes. 
+//"Callback functions in JavaScript are commonly used to handle the result of asynchronous operations. They allow you to define what should happen after an asynchronous task, like an API call or timer, completes. However, callbacks don’t inherently make JavaScript asynchronous; asynchronous behavior comes from APIs provided by the environment (like browsers or Node.js), which execute tasks outside the main thread and use callbacks to return the results." 
+
+// 1. Synchronous Callback Example:
+// function greet(name, callback) {
+//   console.log("Hello, " + name + "!");
+//   callback();  // Calling the callback function
+// }
+
+// function sayGoodbye() {
+//   console.log("Goodbye!");
+// }
+
+// greet("Alice", sayGoodbye);
+
+
+// 2. Asynchronous Callback Example (Using setTimeout):
+// function fetchData(callback) {
+//   console.log("Fetching data...");
+
+//   setTimeout(function() {
+//     console.log("Data fetched successfully!");
+//     callback();  // Calling the callback after data is fetched
+//   }, 2000);  // Simulates a 2-second delay
+// }
+
+// function processData() {
+//   console.log("Processing data...");
+// }
+
+// fetchData(processData);
+
+
+
+
 
 setTimeout(function(){
     console.log('Timer');
-},5000);
+},5000); 
 
-`  function x(y){
-      console.log('X');
-  }
-  x();
 
-  function y(x){
-      console.log('Y');
-  }
-  y();
-`
 
 //Event
 document.getElementById("Clickme")

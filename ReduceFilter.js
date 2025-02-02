@@ -11,7 +11,7 @@ const dataSet = [500, 200, 400, 500, 1000];
     { name: "lav", score: 11 }, 
   ];
   const sumData = data.reduce((acc, curr) => acc + curr.score, 100);
-  console.log(sumData);
+  console.log(sumData); 
 
 
   //Filter 

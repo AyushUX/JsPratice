@@ -5,9 +5,17 @@
 // var a=10;
 // Result line 4 p undefined aayga 
 
+// When you declare a variable using var, it is hoisted to the top of its scope (function or global scope).
+// However, only the declaration is hoisted, not the initialization.
+// The above code is effectively treated like this by the JavaScript engine:
+
+// var a;       // Declaration is hoisted
+// console.log(a); // `a` exists but is undefined
+// a = 10;      // Initialization happens here
+
 // You can redeclare and update var variables within the same scope.
 
-//Var
+//Var 
 // function example() {
 //     var x = 10;
 //     if (true) {
@@ -46,28 +54,29 @@
 // console.log(a);
 // Ye krskte hai but const k case m esa naii krskte hai 
 
-// let a=5;
+// let a=5; 
 // a=10;
 // console.log(a); ye bhi sahi hai kuki redeclare naii krskte hai 
 
-let a = 5;        // This line declares a variable `a` using the `let` keyword and initializes it with the value 5.
-a = 10;           // This line reassigns the value of `a` to 10.
-console.log(a);   // This line outputs the current value of `a` to the console, which will be 10.
+// let a = 5;        // This line declares a variable `a` using the `let` keyword and initializes it with the value 5.
+// a = 10;           // This line reassigns the value of `a` to 10.
+// console.log(a);   // This line outputs the current value of `a` to the console, which will be 10.
 
 
 
-// const: This keyword was also introduced in ECMAScript 6 (ES6) to address some of the issues with var. Variables declared with const are block scoped, just like let. However, const variables cannot be updated or re-declared within the same block. This means that the value of a const variable is constant and cannot be changed. However, if the const variable is an object, you can still modify the properties of that object.
+// const: This keyword was also introduced in ECMAScript 6 (ES6) to address some of the issues with var. Variables declared with const are block scoped, just like let. However, const variables cannot be updated or re-declared within the same block. This means that the value of a const variable is constant and cannot be changed. 
+//  However, if the const variable is an object, you can still modify the properties of that object.
 
 //Const
-function example() {
-    const x = 1;
-    if (true) {
-      const x = 2; // re-declares x, but cannot update it
-      console.log(x); // 2
-    }
-    console.log(x); // 1
-  }
-Re-declaration: Since the inner and outer x are in different scopes, there's no conflict or error in re-declaring x with const in the inner block.
+// function example() {
+//     const x = 1;
+//     if (true) {
+//       const x = 2; // re-declares x, but cannot update it
+//       console.log(x); // 2
+//     }
+//     console.log(x); // 1
+//   }
+// Re-declaration: Since the inner and outer x are in different scopes, there's no conflict or error in re-declaring x with const in the inner block.
  
 //   const b=100;
 //   b=1000;

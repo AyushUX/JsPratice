@@ -5,7 +5,7 @@ import './App.css'
 
 function App() {
   
-    const mockData = [
+    const mockData = [ 
     {
       id: 1,
       title: "iPhone 9",
@@ -89,8 +89,7 @@ function App() {
                 </div>
             )
         })
-    }
-    
+    } 
     </>
   );
 }

@@ -1,4 +1,4 @@
- //Push
+//Push
 // let Arr = [1,2,3,4,5]
 // Arr.push(80)
 // console.log(Arr);
@@ -33,10 +33,10 @@
 // console.log(fruit1);
 
 // //Flat
-const arr = [1, 2, [3, 4, [5, 6, [7, 8]]]];
-const flattenArray = arr.flat(3);
-console.log(flattenArray);
-Output: [1, 2, 3, 4, 5, 6, 7, 8]
+// const arr = [1, 2, [3, 4, [5, 6, [7, 8]]]];
+// const flattenArray = arr.flat(3);
+// console.log(flattenArray);
+// Output: [1, 2, 3, 4, 5, 6, 7, 8]
 
 
 // //Indexof
@@ -57,7 +57,8 @@ Output: [1, 2, 3, 4, 5, 6, 7, 8]
 
 // //tostring
 // const fruits4 = ['apple', 'banana', 'mango', 'grape', 'apple'];
-// console.log(fru its4.toString());
+// const ayush= fruits4.toString()
+// console.log(ayush);
 // Output: "apple,banana,mango,grape,apple"
 
 
