@@ -1,87 +1,155 @@
-// In JavaScript, events are occurrences or happenings that take place in the browser or in the environment where your JavaScript code is running. Events can be triggered by user interactions, like clicks or keypresses, by the browser, like page loading or resizing, or by other parts of your code, like custom events you create.
+// Event handling in JavaScript refers to writing code that responds to user interactions like clicks, mouse movements, key presses, form submissions, etc.
+
+// Event: Any user interaction or browser action (e.g., click, submit, keydown).
+// Event Listener: A function that runs in response to an event.
+
+// Basic Steps for Event Handling:
+
+// 1. Select the Element: Use methods like document.getElementById() or document.querySelector() to select the HTML element you want to listen to.
+// 2. Add an Event Listener: Use the addEventListener() method to attach an event listener to the selected element.
+// 3. Define the Event Handler: Create a function that will be executed when the event occurs.
+// 4. Remove Event Listener (Optional): You can also remove an event listener using removeEventListener() if needed.
+
+// Step 1: Select the element
+const button = document.getElementById('myButton');
+
+// Step 2: Add an event listener
+button.addEventListener('click', function(event) {
+    // Step 3: Define the event handler
+    alert('Button was clicked!');
+});
 
 
-// Here are some key concepts related to events in JavaScript:
-
-// 1. Event Handling: Event handling involves responding to events when they occur. You can attach event handlers to elements or objects to specify what should happen when a particular event occurs.
-
-// 2. Event Listener: An event listener is a function that listens for a specific type of event on a particular element or object. When the event occurs, the listener is triggered, and its associated code is executed.
-
-// 3. Event Types: There are many types of events in JavaScript, including:
-// User Interface Events: Such as click, mouseover, mouseout, keydown, keyup, etc.
-// Document Events: Such as load, DOMContentLoaded, resize, scroll, etc.
-// Form Events: Such as submit, change, input, etc.
-// Custom Events: You can also create and dispatch custom events using the CustomEvent constructor.
-
-// 4. Event Propagation: When an event occurs on a particular element, it can propagate or bubble up through its ancestors in the DOM tree, triggering event listeners on those elements as well. Event propagation can occur in two phases: capturing phase and bubbling phase.
-
-// 5. Event Object: When an event occurs, an event object is created that contains information about the event, such as the type of event, the target element, and any additional data associated with the event.
-
-// 6. Preventing Default Behavior: Some events have default behaviors associated with them, such as form submission or link navigation. You can prevent the default behavior from occurring by calling the preventDefault() method on the event object.
+// Event Types: Common event types include click, mouseover, keydown, submit, etc.
+// Event Propagation: Events can bubble up from child elements to parent elements (bubbling) or be captured from parent to child (capturing).
+// Prevent Default Behavior: You can prevent the default action of an event (like form submission) using event.preventDefault().
 
 
-<Button id='click me'></Button>
+// Event Delegation
+// Event Delegation is a technique where a single event listener is attached to a parent element to handle events for multiple child elements.
+// This is efficient, especially when you have many dynamic elements (e.g., a list of items added via JS).
+// Event Delegation is a technique where a single event listener is attached to a parent element to handle events for multiple child elements.
+// This is efficient, especially when you have many dynamic elements (e.g., a list of items added via JS).
 
-document.getElementById('Click me')
-
-.addEventListener('click', function (){
-    console.log('Button Clicked');
-})
-
-
-
-
-// Event Propagation:
-// Event propagation is the mechanism by which events propagate through the DOM tree, either from the outermost ancestors down to the target element (event capturing) or from the target element up to the outermost ancestors (event bubbling).There are three phases of event propagation:
-
-// Event Bubbling: Bottom to Top
-// Event bubbling is the process where an event triggered on the innermost element is first captured by the innermost element and then propagated to its outer ancestors in the DOM hierarchy. This means that after the event is handled by the target element, it moves up the DOM tree, triggering any event handlers attached to its parent elements, and so on up to the root element (usually <html>).For example, consider a structure where you have a <div> inside another <div>, and both have click event handlers attached. If you click on the inner <div>, the event will first be handled by the inner <div>'s handler, then the outer <div>'s handler (if it has one).
-<body>
-
-{/* <div id="outer" style="padding: 20px; border: 1px solid black;">
-  Outer Div
-  <div id="inner" style="padding: 20px; border: 1px solid red;">
-    Inner Div
-  </div>
-</div> */}
+{/* <ul id="list">
+  <li>Item 1</li>
+  <li>Item 2</li>
+  <li>Item 3</li>
+</ul>
 
 <script>
-  {/* document.getElementById('outer').addEventListener('click', function() {
-    console.log('Outer div clicked');
+  const list = document.getElementById("list");
+
+  list.addEventListener("click", function (e) {
+    if (e.target.tagName === "LI") {
+      console.log("Clicked:", e.target.textContent);
+    }
+  }); */}
+
+
+// Event propagation 
+//   Event propagation in the Document Object Model (DOM) describes the order in which events are handled as they travel through the DOM tree. The two primary phases of event propagation are:
+
+// 1.Capturing Phase
+// The event starts from the top-most element (document) and travels down to the target element.
+// Use case - This phase is less commonly used but can be useful when you want to Stop an event before it reaches the target element.
+
+const outer = document.getElementById("outer");
+outer.addEventListener("click", () => {
+  console.log("Outer DIV - Capturing");
+}, true);
+
+// 2. Bubbling Phase
+// This phase occurs after the event has reached the target element.
+// The event starts at the target element and then bubbles up through the DOM tree back to the root.
+
+// Use case - This is the default phase for most event listeners and is often used for event delegation, allowing parent elements to handle events triggered by their children.
+
+const outer = document.getElementById("outer");
+outer.addEventListener("click", () => {
+  console.log("Outer DIV - Bubbling");
+});
+
+// Event Listener Options:
+// When you add an event listener, you can specify which phase it should handle using the capture parameter.
+// capture: true: The event listener will be invoked during the capturing phase.
+// capture: false (or omitted): The event listener will be invoked during the bubbling phase.
+
+// Stopping Propagation:
+// event.stopPropagation(): Prevents the event from propagating further up or down the DOM tree in the current phase.
+// event.stopImmediatePropagation(): Stops the event from propagating and also prevents other listeners of the same event type on the same element from executing.
+
+
+// Example of Event Handling 
+
+{/* <body>
+    <button id="myButton">Click Me!</button>
+    <p id="message"></p>
+
+    <script>
+        // Select the button and message elements
+        const button = document.getElementById('myButton');
+        const message = document.getElementById('message');
+
+        // Define the event handler function
+        function handleClick() {
+            message.textContent = 'Button was clicked!';
+        }
+
+        // Add an event listener to the button
+        button.addEventListener('click', handleClick);
+    </script>
+</body> */}
+
+
+// More examples 
+// 1) Using HTML Attribute (Old Way)
+
+// <button onclick="sayHello()">Click Me</button>
+
+// <script>
+//   function sayHello() {
+//     alert("Hello from button!");
+//   }
+// </script>
+
+// 2) Using DOM Property
+// </script>
+// <button id="myBtn">Click Me</button>
+// const btn = document.getElementById("myBtn");
+//   btn.onclick = function () {
+//     alert("Button clicked!");
+//   };
+// </script>
+// Simple, but you can only attach one handler per event this way.
+
+// 3) Using addEventListener (Best Practice )
+
+// <button id="myBtn">Click Me</button>
+
+// <script>
+//   const btn = document.getElementById("myBtn");
+
+//   btn.addEventListener("click", function () {
+//     alert("You clicked the button!");
+//   });
+// </script>
+// Recommended: You can add multiple listeners and control bubbling/capturing.
+
+
+
+// 4) Form Submit Handling
+{/* <form id="myForm">
+  <input type="text" id="name" placeholder="Enter name" />
+  <button type="submit">Submit</button>
+</form>
+
+<script>
+  const form = document.getElementById("myForm");
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault(); // Prevent page refresh
+    const name = document.getElementById("name").value;
+    alert("Submitted name: " + name);
   });
-
-  document.getElementById('inner').addEventListener('click', function() {
-    console.log('Inner div clicked');
-  }); */}
-</script>
-</body>
-// In this example, if you click on the inner <div>, both "Inner div clicked" and "Outer div clicked" will be logged, demonstrating event bubbling.
-
-// Event capturing - Top to Bottom 
-// Event capturing is the phase of event propagation in which events are captured by the outermost ancestor element first and then propagated down to the target element. This is the opposite of event bubbling, where events start at the target element and bubble up to the outermost ancestor.
-element.addEventListener(eventType, handlerFunction, true);
-
-
-// In event capturing, when an event occurs on a target element, the event starts at the highest level ancestor (usually the <html> element) and then moves down through the DOM hierarchy until it reaches the target element. Along the way, each ancestor element has the opportunity to handle the event before it reaches the target element.
-<body>
-
-<div id="outer" style="padding: 20px; border: 1px solid black;">
-  Outer Div
-  <div id="inner" style="padding: 20px; border: 1px solid red;">
-    Inner Div
-  </div>
-</div>
-
-<script>
-  {/* document.getElementById('outer').addEventListener('click', function() {
-    console.log('Outer div clicked (capturing)');
-  }, true); // Setting useCapture to true for event capturing
-
-  document.getElementById('inner').addEventListener('click', function() {
-    console.log('Inner div clicked');
-  }); */}
-</script>
-
-</body>
-// In this example, if you click on the inner <div>, "Outer div clicked (capturing)" will be logged before "Inner div clicked", demonstrating event capturing.
-
+</script> */}
