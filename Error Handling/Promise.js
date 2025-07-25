@@ -1,115 +1,166 @@
-// A Promise in JavaScript is an object that represents the eventual completion (or failure) of an asynchronous operation.
-// This function defines the logic for the asynchronous operation and has two arguments:
-// resolve: A function used to indicate successful completion of the operation and provide the resulting value.
-// reject: A function used to indicate failure of the operation and provide an error object.
+// The Promise object represents the eventual completion (or failure) of an asynchronous operation and its resulting value.
 
-// A Promise can be in one of three states:
+// Creating a Promise
+// Use the Promise constructor which takes an executor function with two callbacks: resolve and reject.
 
-// Pending: The initial state, meaning the operation is still ongoing.
-// Fulfilled: The operation completed successfully, and the resolve function was called with the resulting value.
-// Rejected: The operation encountered an error, and the reject function was called with an error object.
-
-//Type1
-//Create Promises
-const promiseone = new Promise(function (resolve, reject) {
-  setTimeout(function () {
-    console.log("Successful");
-    resolve();
-  }, 1000);
-});
-// A Promise takes a function as an argument, known as the executor function, which has two parameters:
-// resolve → Call this when the operation is successful.
-// reject → Call this when the operation fails.
-
-// setTimeout(function() { ... }, 1000);
-// Inside the Promise, setTimeout() is used to simulate an asynchronous task (like fetching data).
-// The function inside setTimeout() executes after 1 second (1000 ms).
-// Consume Promises 
-promiseone.then(function () {
-  console.log("Promise Consumed");
-});
-promiseone.catch((error) => {
-  console.log("Error");
-});
-
-//Type2
-new Promise(function (resolve, reject) {
-  setTimeout(function () {
-    console.log("Sucess");
-    resolve(0);
-  }, 1000);
+const myPromise= new Promise((resolve,reject)=>{
+      // some asynchronous operation
+    let success = true;
+    if(success){
+        resolve("Operation succeeded")
+    }
+    else{
+        reject('Operation failed')
+    }
 })
-  .then(function () {
-    console.log("Promise Consumed");
-  })
-  .catch((error) => {
-    console.log(error);
-  });
 
-//Type3
-const three = new Promise(function (resolve, reject) {
-  setTimeout(function () {
-    console.log("Sucessful");
-    resolve({ username: "Ayush", email: "ausj@gmail.com" });
-  }, 1000);
-});
-three.then(function (yfu) {
-  console.log(yfu);
-});
-three.catch((error) => {
-  console.log(error);
-});
+// Consuming a Promise
+// You consume a promise by attaching handlers using .then() and .catch() methods:
 
-//Type3A
-// Function to simulate fetching user data from a server (asynchronous)
-function fetchUserData() {
-  return new Promise((resolve, reject) => {
-    // Simulating asynchronous operation (fetching data)
-    setTimeout(() => {
-      let userData = {
-        username: "john_doe",
-        email: "john@example.com",
-        age: 30,
-      };
-      resolve(userData); // Resolve with the fetched user data
-    }, 1500); // Simulating a delay of 1.5 seconds
-  });
+// A) Using .then(), .catch()
+
+myPromise
+.then(function(data){
+    console.log(data); 
+})
+.catch(function(error){
+    console.log(error); 
+})
+.finally(function(){
+    console.log("promise settled");
+})
+
+// B)  Using async/await
+
+async function ayush(){
+    try {
+        const response = await myPromise;
+        console.log(response);
+        
+    } catch (error) {
+        console.log(error);
+        
+    }
 }
 
-// Consuming the Promise
-console.log("Fetching user data...");
-fetchUserData()
-  .then((userData) => {
-    // This function is called if the promise is resolved
-    console.log("User data fetched successfully:");
-    console.log(userData);
-  })
-  .catch((error) => {
-    // This function is called if the promise is rejected
-    console.error("Error fetching user data:", error);
-  });
+// Example using fetch api
 
-//Type4
-const four = new Promise(function (resolve, reject) {
-  setTimeout(function () {
-    let error = false;
-    if (!error) {
-      resolve({ username: "Aayu", email: "suce.dw8w" });
-    } else {
-      reject("something went wrong");
+async function ayushi(){
+    try {
+        const response= await fetch('')
+        const data = await response.json()
+        console.log(data);
+        
+    } catch (error) {
+        console.log(error);
+        
     }
-  }, 1000);
-});
+}
+ayushi();  
 
-four
-  .then(function (user) {
-    console.log(user);
-    return user.username; 
-  })
-  .then(function (username) {
+
+OR 
+
+fetch('')
+.then((response)=>{
+    return response.json()
+})
+// Handle krne k liye ke aur then aayga
+.then((data)=>{
+    console.log(data);  
+})
+// data ek variable ka naam hai bass jo upar wale then ne return kiya hai
+.catch((error)=>{
+    console.log(error);
+    
+})
+
+// More example 
+// Example 1
+
+const promiseOne = new promise(function(resolve, reject){
+    setTimeout(function(){
+        console.log("successfull");
+        resolve()
+    },2000)
+})
+promiseOne
+.then(function(){
+    console.log("promise consumed"); 
+})
+.catch(function(error){
+    console.log("error"); 
+})
+
+// Example 2
+
+new promise(function(resolve, reject){
+    setTimeout(function(){
+        console.log("successfull");
+        resolve()
+    },2000)
+})
+.then(function(){
+    console.log("promise consumed"); 
+})
+.catch(function(error){
+    console.log("error"); 
+})
+
+// Example 3
+
+const two = new Promise(function(resolve,reject){
+    setTimeout(function(){
+        console.log("success");
+        resolve({username:'ayush', email: 'ayusjh@gmail.com'})
+    },2000)
+})
+two
+.then(function(user){
+console.log(user);
+})
+
+// Example 4
+
+const three= new promise(function(resolve,reject){
+    setTimeout(function(){
+        let userData={
+           username: "john_doe",
+            email: "john@example.com",
+            age: 30
+        }
+            resolve(userData);
+    },2000)
+})
+three
+.then(function(userData){
+    console.log("userData");
+})
+.catch(function(error){
+    console.log("error"); 
+})
+
+// Example 5 IMP
+
+const five = new promise (function(resolve,reject){
+    setTimeout(function(){
+        let error = false;
+        if (!error){
+            resolve({username: "Aayu", email: "suce.dw8w"})
+        } else{
+            reject('something went wrong')
+        }
+    },2000)
+})
+five
+.then(function(data){
+    console.log(data);
+    return data.username;
+})
+.then(function(username){
     console.log(username);
-  })
-  .catch(function (error) {
+})
+.catch(function (error) {
     console.log("Error");
   })
   .finally(function () {
