@@ -30,30 +30,78 @@
 // Additional Properties and Methods:
 // Additional properties and methods can be defined within the constructor function as needed.
 
-function Person(name, age){
-    this.name=name;
-    this.age = age;
+// A constructor function in JavaScript is a special type of function used to create and initialize objects. It acts like a blueprint for creating multiple similar objects.
 
-    this.greet= function(){
-        console.log("Hello, My name is" + this.name + "and I am" + this.age + "year's old");
+// Key Characteristics of a Constructor Function:
+
+// Named with a Capital Letter by convention.
+// Called with the new keyword.
+// Inside, this refers to the new object being created.
+// You can add properties and methods to the object using this.
+
+// Example 1 - Basic object creation
+
+function Animal(name, type){
+    this.name = name;
+    this.type= type;
+    this.describe= function(){
+        console.log('${this.name} is a ${this.type}'); 
     }
 }
 
-let Person1= new Person('Ayush', 98);
-let Person2 = new Person ('Deva', 24)
+const dog = new Animal("buddy", "dog")
+const cat = new Animal("Whiskers", "Cat");
 
-Person1.greet();
-Person2.greet();
+dog.describe(); // Buddy is a Dog
+cat.describe(); // Whiskers is a Cat
 
-// function Car(make, model, year) {
-//     this.make = make;
-//     this.model = model;
-//     this.year = year;
-//   }
-//   const auto = new Car('Honda', 'Accord', 1998);
-  
-//   console.log(auto instanceof Car);
-//   // Expected output: true
-  
-//   console.log(auto instanceof Object);
-//   // Expected output: true
+// Example 2: 
+function Student(name, marks) {
+  this.name = name;
+  this.marks = marks;
+
+  this.hasPassed = function () {
+    return this.marks >= 35;
+  };
+}
+
+const student1 = new Student("Riya", 80);
+const student2 = new Student("Jay", 25);
+
+console.log(student1.hasPassed()); // true
+console.log(student2.hasPassed()); // false
+
+// Example 3 - without parameter
+
+function Person() {
+  this.name = "John";
+  this.age = 23;
+  this.greet = function() {
+    console.log("Hello, " + this.name);
+  };
+}
+
+const person1 = new Person();
+const person2 = new Person();
+
+console.log(person1.name); // John
+console.log(person2.age);  // 23
+person1.greet();           // Hello, John
+
+
+// Example 4 - Sharing Methods via Prototype
+
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+}
+
+Person.prototype.greet = function() {
+  console.log(`Hello, I am ${this.name}`);
+};
+
+const Person1 = new Person("John", 23);
+const Person2 = new Person("Jane", 28);
+
+person1.greet(); // Hello, I am John
+person2.greet(); // Hello, I am Jane
