@@ -6,7 +6,8 @@
 // Result line 4 p undefined aayga 
 
 // When you declare a variable using var, it is hoisted to the top of its scope (function or global scope).
-// However, only the declaration is hoisted, not the initialization.
+// However, only the declaration is hoisted, not the initialization. ❌ Initialization (value assign karna) hoist nahi hota.- imp
+
 // The above code is effectively treated like this by the JavaScript engine:
 
 // var a;       // Declaration is hoisted
@@ -26,7 +27,9 @@
 // }
 
 // Functional scope hota hai bole to function k andar variable declare kiya hai to bahar access naii krskte hai 
-// aur Global scope bhi ki function k bahar varibale declare kiya hai to function k anadar aaccess krskte hai 
+// var is function-scoped, block-scoped nahi.
+// Iska matlab: poore example() function ke andar ek hi x variable exist karta hai. - Imp
+// Jab tu if (true) block mein var x = 20; likhta hai, wo same outer x = 10 ko overwrite kar deta hai.- imp
 
 
 
@@ -90,11 +93,38 @@
 
 //   console.log(a);
 //   var a=100;
-//   Reference error 
+//   undefined error 
   
+// console.log(b);
+// let b = 10;
+// ReferenceError: Cannot access 'b' before initialization
+// Because let and const are hoisted but not initialized — they go into the Temporal Dead Zone (TDZ), where accessing them before the actual line of declaration causes a ReferenceError.
+
+
+
 // or 
 // console.log(x);
 // reference error 
+// ReferenceError: x is not defined
 
 
+// TDZ = Temporal Dead Zone
 
+// Yeh ek aisi zone hoti hai jisme:
+// Variable declare toh ho chuka hota hai (JavaScript ne hoist kar diya hota hai),
+// Lekin tu usse access nahi kar sakta jab tak uski line tak nahi pahunchta.
+// Agar tu use karne ki koshish karega — ❌ ReferenceError aayega.
+
+console.log(a); // ❌ ReferenceError
+let a = 10;
+
+// Jab JS engine code read karta hai, to:
+// let a ko hoist karta hai — lekin uski initialization nahi karta.
+// TDZ start hoti hai from top of scope (ya block) till let a = 10 line.
+// Jab tu console.log(a) karta hai uss zone ke andar, JS kehta hai:
+// “Bhai, a exist toh karta hai, lekin abhi accessible nahi hai — wait kar.”
+
+// What Happens Internally?
+// let a; hoist ho gaya
+// "a" locked hai TDZ mein until this line is executed.
+// Jaise hi let a = 10; execute hota hai — TDZ khatam, ab access allowed.
